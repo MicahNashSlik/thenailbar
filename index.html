@@ -572,23 +572,24 @@
                 <p>Browse through our portfolio of nail designs</p>
             </div>
             <div class="gallery-grid">
+                <!-- IMPORTANT: Ensure your images are in a folder named 'images' in the same directory as this file -->
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1590540172794-7ce5df0f34cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Nail Design 1">
+                    <img src="images/nail_design_1.jpg" alt="Nail Design 1">
                 </div>
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1570949730933-e8cc158d77da?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Nail Design 2">
+                    <img src="images/nail_design_2.jpg" alt="Nail Design 2">
                 </div>
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1601924721307-0b2148b05dd5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Nail Design 3">
+                    <img src="images/nail_design_3.jpg" alt="Nail Design 3">
                 </div>
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Nail Design 4">
+                    <img src="images/nail_design_4.jpg" alt="Nail Design 4">
                 </div>
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1608744882201-52a7f7f3dd70?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Nail Design 5">
+                    <img src="images/nail_design_5.jpg" alt="Nail Design 5">
                 </div>
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1600172454054-df37cf0defc4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Nail Design 6">
+                    <img src="images/nail_design_6.jpg" alt="Nail Design 6">
                 </div>
             </div>
         </div>
@@ -910,7 +911,8 @@
         onAuthStateChanged(auth, async (user) => {
             if (user) {
                 userId = user.uid;
-                await fetchBookings();
+                // Only start fetching bookings after a user is authenticated
+                fetchBookings();
             } else {
                 if (typeof __initial_auth_token !== 'undefined') {
                     await signInWithCustomToken(auth, __initial_auth_token);
@@ -920,7 +922,7 @@
             }
         });
 
-        const fetchBookings = async () => {
+        const fetchBookings = () => {
             const bookingsRef = collection(db, `/artifacts/${appId}/public/data/bookings`);
             const q = query(bookingsRef);
             
