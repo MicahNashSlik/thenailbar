@@ -623,24 +623,24 @@
                 <h2>Book Your Appointment</h2>
                 <p>Schedule your visit to The Nail Bar</p>
             </div>
-            <div class="booking-container">
-                <script src="https://widget.simplybook.me/v2/widget/widget.js"></script>
-                <script>
-                    var widget = new SimplybookWidget({
-                        "widget_type": "iframe",
-                        "url": "https://sumeshnails.simplybook.me",
-                        "theme": "classic",
-                        "theme_settings": {
-                            "timeline_hide_unavailable": "0",
-                            "timeline_modern_display": "as_table"
-                        },
-                        "container_id": "sb_booking",
-                        "datepicker": "top_calendar",
-                        "is_rtl": false,
-                        "app_config": { "allow_switch_to_ada": 0 }
-                    });
-                </script>
-                <div id="sb_booking" style="width: 100%; height: 600px;"></div>
+          <script>
+			var widget = new SimplybookWidget({
+				"widget_type": "iframe",
+				"url": "https://sumeshnails.simplybook.me",
+				"theme": "classic",
+				"theme_settings": {
+					"timeline_hide_unavailable": "0",
+					"timeline_modern_display": "as_table"
+				},
+				"container_id": "sb_booking",
+				"datepicker": "top_calendar",
+				"is_rtl": false,
+				"app_config": { "allow_switch_to_ada": 0 }
+			});
+		</script><!-- SIMPLYBOOKME WIDGET CODE HERE -->
+                <div id="sb_booking"></div>
+            </div>
+        </div>
                 
                 <!-- This button is for a direct WhatsApp confirmation -->
                 <a href="https://wa.me/27817719639?text=Hi%20Sumeshree%2C%20I%20have%20booked%20an%20appointment%20with%20you%20via%20the%20website%20and%20would%20like%20to%20confirm%20the%20details." class="btn" style="margin-top: 20px;">
@@ -853,4 +853,5 @@
     </footer>
 </body>
 </html>
+
 
