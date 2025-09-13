@@ -418,6 +418,27 @@
             margin-top: 40px;
         }
         
+        /* Floating Button */
+        .floating-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 999;
+            background: var(--primary);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+            transition: transform 0.3s, background 0.3s;
+        }
+
+        .floating-button:hover {
+            transform: translateY(-5px);
+            background: var(--secondary);
+        }
+
         /* Footer */
         footer {
             background: var(--dark);
@@ -596,21 +617,6 @@
     </section>
 
     <!-- Booking Section -->
-    <script>
-			var widget = new SimplybookWidget({
-				"widget_type": "iframe",
-				"url": "https://sumeshnails.simplybook.me",
-				"theme": "classic",
-				"theme_settings": {
-					"timeline_hide_unavailable": "0",
-					"timeline_modern_display": "as_table"
-				},
-				"container_id": "sb_booking",
-				"datepicker": "top_calendar",
-				"is_rtl": false,
-				"app_config": { "allow_switch_to_ada": 0 }
-			});
-		</script>
     <section id="booking" class="booking">
         <div class="container">
             <div class="section-title">
@@ -618,8 +624,27 @@
                 <p>Schedule your visit to The Nail Bar</p>
             </div>
             <div class="booking-container">
-                <a href="https://wa.me/27817719639?text=Hi%20Sumeshree%2C%20I%20would%20like%20to%20book%20an%20appointment.%20" class="btn">
-                    Chat with Sumeshree on WhatsApp
+                <script src="https://widget.simplybook.me/v2/widget/widget.js"></script>
+                <script>
+                    var widget = new SimplybookWidget({
+                        "widget_type": "iframe",
+                        "url": "https://sumeshnails.simplybook.me",
+                        "theme": "classic",
+                        "theme_settings": {
+                            "timeline_hide_unavailable": "0",
+                            "timeline_modern_display": "as_table"
+                        },
+                        "container_id": "sb_booking",
+                        "datepicker": "top_calendar",
+                        "is_rtl": false,
+                        "app_config": { "allow_switch_to_ada": 0 }
+                    });
+                </script>
+                <div id="sb_booking" style="width: 100%; height: 600px;"></div>
+                
+                <!-- This button is for a direct WhatsApp confirmation -->
+                <a href="https://wa.me/27817719639?text=Hi%20Sumeshree%2C%20I%20have%20booked%20an%20appointment%20with%20you%20via%20the%20website%20and%20would%20like%20to%20confirm%20the%20details." class="btn" style="margin-top: 20px;">
+                    Confirm Appointment on WhatsApp
                 </a>
             </div>
         </div>
@@ -783,6 +808,9 @@
         </div>
     </section>
 
+    <!-- Floating "Book Now" Button -->
+    <a href="#booking" class="floating-button">Book Now</a>
+
     <!-- Footer -->
     <footer>
         <div class="container">
@@ -825,5 +853,4 @@
     </footer>
 </body>
 </html>
-
 
