@@ -293,129 +293,8 @@
         .booking-container {
             display: flex;
             justify-content: center;
-            flex-direction: column;
-            align-items: center;
             gap: 40px;
-        }
-
-        .booking-step {
-            width: 100%;
-            max-width: 600px;
-            background-color: white;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-
-        .booking-step h3 {
-            font-size: 1.8rem;
-            color: var(--secondary);
-            margin-bottom: 20px;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-            text-align: left;
-        }
-        
-        .form-group input {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 16px;
-        }
-        
-        .calendar-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        
-        .calendar-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 5px;
-        }
-
-        .calendar-cell {
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 8px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-        
-        .calendar-cell.header {
-            background-color: var(--secondary);
-            color: white;
-            font-weight: 600;
-        }
-        
-        .calendar-cell.available {
-            background-color: #e8f5e9;
-            color: #2e7d32;
-            cursor: pointer;
-        }
-        
-        .calendar-cell.busy {
-            background-color: #ffebee;
-            color: #c62828;
-            cursor: not-allowed;
-        }
-        
-        .calendar-cell.today {
-            border: 2px solid var(--primary);
-        }
-        
-        .calendar-cell.selected {
-            background-color: var(--primary);
-            color: white;
-            font-weight: bold;
-        }
-
-        .time-slots {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .time-slot {
-            background-color: #fff;
-            border: 1px solid var(--secondary);
-            color: var(--secondary);
-            padding: 10px;
-            border-radius: 8px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .time-slot:hover {
-            background-color: var(--secondary);
-            color: white;
-        }
-
-        .time-slot.booked {
-            background-color: #ddd;
-            color: #aaa;
-            border-color: #ccc;
-            cursor: not-allowed;
-        }
-
-        .confirmation-message {
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            text-align: center;
-            margin-top: 40px;
+            min-height: 500px; /* Provides space for the widget */
         }
         
         /* Footer */
@@ -566,40 +445,59 @@
                 <p>Browse through our portfolio of nail designs</p>
             </div>
             <div class="gallery-grid">
-                <!-- IMPORTANT: Ensure your images are in a folder named 'images' in the same directory as this file -->
                 <div class="gallery-item">
-                    <img src="images/nail_design_1.jpg" alt="Nail Design 1">
+                    <img src="4CE95228-2302-440C-940C-77A00F2CBCAF.jpg" alt="Nail Design 1">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/nail_design_2.jpg" alt="Nail Design 2">
+                    <img src="8DA8BC25-0EA5-4518-9466-6905742EE8B2.jpg" alt="Nail Design 2">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/nail_design_3.jpg" alt="Nail Design 3">
+                    <img src="E58829CB-68C5-447C-A502-8324B159B1D0.jpg" alt="Nail Design 3">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/nail_design_4.jpg" alt="Nail Design 4">
+                    <img src="A21B73E5-A68F-47F1-9D3E-F4C9E6671675.jpg" alt="Nail Design 4">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/nail_design_5.jpg" alt="Nail Design 5">
+                    <img src="D3AA44E8-7CD3-4D22-BC2B-4E710FE934A7.jpg" alt="Nail Design 5">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/nail_design_6.jpg" alt="Nail Design 6">
+                    <img src="FCFEE322-BF2B-45C5-958E-FE3CEE0FCDDE.jpg" alt="Nail Design 6">
+                </div>
+				<div class="gallery-item">
+                    <img src="E34EED50-8E80-490D-94DE-80C77C38FB26.jpg" alt="Nail Design 6">
+                </div>
+				<div class="gallery-item">
+                    <img src="EEE491ED-1BDD-4900-8AD4-0DFB4D573436.jpg" alt="Nail Design 6">
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Booking Section -->
-    <section id="booking" class="booking">
+    <!--<section id="booking" class="booking">
         <div class="container">
             <div class="section-title">
                 <h2>Book Your Appointment</h2>
-                <p>Get in touch with Sumeshree to book your slot.</p>
+                <p>Schedule your visit to The Nail Bar</p>
             </div>
             <div class="booking-container">
-                <a href="https://wa.me/27817719639?text=Hi%20Sumeshree%2C%20I%20would%20like%20to%20book%20an%20appointment.%20" class="btn">
-                    Chat with Sumeshree on WhatsApp
-                </a>
+                <script src="https://widget.simplybook.me/v2/widget/widget.js"></script><-->
+		<script>
+			var widget = new SimplybookWidget({
+				"widget_type": "iframe",
+				"url": "https://sumeshnails.simplybook.me",
+				"theme": "classic",
+				"theme_settings": {
+					"timeline_hide_unavailable": "0",
+					"timeline_modern_display": "as_table"
+				},
+				"container_id": "sb_booking",
+				"datepicker": "top_calendar",
+				"is_rtl": false,
+				"app_config": { "allow_switch_to_ada": 0 }
+			});
+		</script><!-- SIMPLYBOOKME WIDGET CODE HERE -->
+                <div id="sb_booking"></div>
             </div>
         </div>
     </section>
@@ -736,27 +634,6 @@
         </div>
     </section>
 
-    <!-- Connect Section -->
-    <section id="connect" class="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>Connect With Us</h2>
-                <p>Follow us on social media and find our location on the map.</p>
-            </div>
-            <div class="about-content">
-                <div class="about-text">
-                    <h3>Find Us Online</h3>
-                    <p><a href="https://www.instagram.com/thenailbarmidrand" target="_blank" class="text-blue-600 font-bold hover:underline"><i class="fab fa-instagram"></i> Instagram: @thenailbarmidrand</a></p>
-                    <p><a href="https://www.facebook.com/Justnailzmidrand" target="_blank" class="text-blue-600 font-bold hover:underline"><i class="fab fa-facebook-f"></i> Facebook: @Justnailzmidrand</a></p>
-                    <p><a href="https://maps.app.goo.gl/3zFjDh3uYKUaDPdz8" target="_blank" class="text-blue-600 font-bold hover:underline"><i class="fas fa-map-marker-alt"></i> Find us on Google Maps</a></p>
-                </div>
-                <div class="about-image">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3587.200155097723!2d28.11059927519102!3d-25.96147417757997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e956fa5f4d1e2a5%3A0x6a2c22a106a750c3!2s29%20Talalla%20Cres%2C%20Noordwyk%2C%20Midrand%2C%201687%2C%20South%20Africa!5e0!3m2!1sen!2sus!4v1717342676880!5m2!1sen!2sus" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Contact Section -->
     <section id="contact" class="about">
         <div class="container">
@@ -794,7 +671,7 @@
                     <h3>Contact Info</h3>
                     <p><i class="fas fa-map-marker-alt"></i> 29 Talalla Cres, Noordwyk, Midrand</p>
                     <p><i class="fas fa-phone"></i> 081 771 9639</p>
-                    <p><i class="fas fa-envelope"></i> sumesh@thenailbar.co.za</p>
+                    <p><i class="fas fa-envelope"></i> thenailbarmidrand@gmail.com</p>
                 </div>
                 <div class="footer-column">
                     <h3>Business Hours</h3>
@@ -818,5 +695,23 @@
             </div>
         </div>
     </footer>
+
+    <script src="https://widget.simplybook.me/v2/widget/widget.js"></script>
+    <script>
+        // SimplyBookMe widget code
+        var widget = new SimplybookWidget({
+            "widget_type": "iframe",
+            "url": "https://sumeshnails.simplybook.me",
+            "theme": "classic",
+            "theme_settings": {
+                "timeline_hide_unavailable": "0",
+                "timeline_modern_display": "as_table"
+            },
+            "container_id": "sb_booking",
+            "datepicker": "top_calendar",
+            "is_rtl": false,
+            "app_config": { "allow_switch_to_ada": 0 }
+        });
+    </script>
 </body>
 </html>
