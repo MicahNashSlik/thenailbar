@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Nail Bar | Admin Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #212529;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #6a60a9;
+            margin-bottom: 20px;
+        }
+
+        .refresh-btn {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #ff6b8b;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .refresh-btn:hover {
+            background-color: #e05c75;
+        }
+
+        .booking-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+
+        .booking-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .booking-item:last-child {
+            border-bottom: none;
+        }
+
+        .booking-details {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+        
+        .booking-details strong {
+            font-size: 1.1rem;
+            color: #212529;
+        }
+
+        .booking-details span {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .booking-item-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .action-btn {
+            padding: 8px 12px;
+            border-radius: 5px;
+            text-decoration: none;
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .whatsapp-btn {
+            background-color: #25d366;
+        }
+
+        .email-btn {
+            background-color: #dc3545;
+        }
+        
+        .loading {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #6a60a9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>The Nail Bar - Booking Dashboard</h1>
+        <p class="text-center">Welcome, Sumeshree! Here are your upcoming appointments.</p>
+        <button class="refresh-btn" onclick="fetchAndDisplayBookings()">Refresh Bookings</button>
+        <ul id="booking-list" class="booking-list">
+            <li class="loading">Loading appointments...</li>
+        </ul>
+    </div>
+
+    <!-- Firebase SDKs for authentication and database -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        import { getFirestore, collection, query, onSnapshot, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+        import { setLogLevel } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+        // Set Firebase debug logs
+        setLogLevel('debug');
+
+        // Use global variables provided by the environment
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+        
+        const bookingListElement = document.getElementById('booking-list');
+        let isAuthReady = false;
+
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                isAuthReady = true;
+                fetchAndDisplayBookings();
+            } else {
+                if (typeof __initial_auth_token !== 'undefined') {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+            }
+        });
+
+        const fetchAndDisplayBookings = () => {
+            if (!isAuthReady) {
+                return;
+            }
+            bookingListElement.innerHTML = '<li class="loading">Loading appointments...</li>';
+
+            const bookingsRef = collection(db, `/artifacts/${appId}/public/data/bookings`);
+            const q = query(bookingsRef);
+            
+            onSnapshot(q, (snapshot) => {
+                bookingListElement.innerHTML = '';
+                if (snapshot.empty) {
+                    bookingListElement.innerHTML = '<li style="text-align:center;">No upcoming appointments.</li>';
+                    return;
+                }
+
+                const bookings = [];
+                snapshot.forEach(doc => {
+                    bookings.push(doc.data());
+                });
+
+                bookings.sort((a, b) => new Date(a.date + 'T' + a.time) - new Date(b.date + 'T' + b.time));
+
+                bookings.forEach(booking => {
+                    const listItem = document.createElement('li');
+                    listItem.classList.add('booking-item');
+                    
+                    const bookingDate = new Date(booking.date + 'T12:00:00').toLocaleDateString('en-US', {
+                        weekday: 'long',
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                    });
+
+                    listItem.innerHTML = `
+                        <div class="booking-details">
+                            <strong>${bookingDate} at ${booking.time}</strong>
+                            <span>Client: ${booking.clientName}</span>
+                            <span>Email: ${booking.clientEmail}</span>
+                            <span>Phone: ${booking.clientPhone}</span>
+                        </div>
+                        <div class="booking-item-actions">
+                            <a href="https://wa.me/${booking.clientPhone}?text=${encodeURIComponent('Hi ' + booking.clientName + ', I am confirming your booking for ' + bookingDate + ' at ' + booking.time + '. Thanks!')}" target="_blank" class="action-btn whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Chat
+                            </a>
+                            <a href="mailto:${booking.clientEmail}?subject=${encodeURIComponent('Booking Confirmation for ' + bookingDate)}&body=${encodeURIComponent('Hi ' + booking.clientName + ',\n\nThis is a friendly reminder to confirm your appointment at The Nail Bar on ' + bookingDate + ' at ' + booking.time + '.\n\nThank you!')}" target="_blank" class="action-btn email-btn">
+                                <i class="fas fa-envelope"></i> Email
+                            </a>
+                        </div>
+                    `;
+                    bookingListElement.appendChild(listItem);
+                });
+            });
+        };
+    </script>
+</body>
+</html>
