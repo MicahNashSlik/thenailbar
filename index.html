@@ -289,8 +289,12 @@
         .booking {
             background-color: var(--light);
             padding-bottom: 100px; /* Add extra padding for the floating ribbon */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
         }
-        
+
         .booking-content {
             width: 100%;
             max-width: 900px;
@@ -334,6 +338,7 @@
             background: var(--dark);
             color: white;
             padding: 60px 0 30px;
+            margin-bottom: 50px; /* Ensure space for the floating ribbon */
         }
         
         .footer-content {
@@ -506,71 +511,25 @@
         </div>
     </section>
 
-     <!-- Booking Section -->
-
-    <section id="booking" class="booking">
-
-        <div class="container">
-
-            <div class="section-title">
-
-                <h2>Book Your Appointment</h2>
-
-                <p>Schedule your visit to The Nail Bar</p>
-
-            </div>
-
-          <script>
-
-var widget = new SimplybookWidget({
-
-"widget_type": "iframe",
-
-"url": "https://sumeshnails.simplybook.me",
-
-"theme": "classic",
-
-"theme_settings": {
-
-"timeline_hide_unavailable": "0",
-
-"timeline_modern_display": "as_table"
-
-},
-
-"container_id": "sb_booking",
-
-"datepicker": "top_calendar",
-
-"is_rtl": false,
-
-"app_config": { "allow_switch_to_ada": 0 }
-
-});
-
-</script><!-- SIMPLYBOOKME WIDGET CODE HERE -->
-
-                <div id="sb_booking"></div>
-
-            </div>
-
-        </div>
-
-                
-
-                <!-- This button is for a direct WhatsApp confirmation -->
-
-                <a href="https://wa.me/27817719639?text=Hi%20Sumeshree%2C%20I%20have%20booked%20an%20appointment%20with%20you%20via%20the%20website%20and%20would%20like%20to%20confirm%20the%20details." class="btn" style="margin-top: 20px;">
-
-                    Confirm Appointment on WhatsApp
-
-                </a>
-
-            </div>
-
-        </div>
-
-    </section>.
+    <!-- Booking Section -->
+    <section id="booking" class="booking">
+        <div class="container">
+            <div class="section-title">
+                <h2>Book Your Appointment</h2>
+                <p>Schedule your visit to The Nail Bar</p>
+            </div>
+            
+            <div class="booking-content">
+                <script src="https://widget.simplybook.me/v2/widget/widget.js"></script>
+                <div id="sb_booking" style="width: 100%; min-height: 600px;"></div>
+                
+                <!-- This button is for a direct WhatsApp confirmation -->
+                <a href="https://wa.me/27817719639?text=Hi%20Sumeshree%2C%20I%20have%20booked%20an%20appointment%20with%20you%20via%20the%20website%20and%20would%20like%20to%20confirm%20the%20details." class="btn whatsapp-button">
+                    Confirm Appointment on WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
     
     <!-- Testimonials Section -->
     <section id="testimonials" class="testimonials">
@@ -791,3 +750,4 @@ var widget = new SimplybookWidget({
     </script>
 </body>
 </html>
+
