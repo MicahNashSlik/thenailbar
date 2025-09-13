@@ -288,26 +288,24 @@
         /* Booking Section */
         .booking {
             background-color: var(--light);
-            padding-bottom: 20px; /* Add some padding at the bottom */
+            padding-bottom: 100px; /* Add extra padding for the floating ribbon */
         }
         
-        .booking-container {
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-            align-items: center;
-            gap: 40px;
+        .booking-content {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
         }
 
         #sb_booking {
             width: 100%;
-            max-width: 900px;
             min-height: 600px;
+            margin-top: 20px;
         }
         
         .whatsapp-button {
             margin-top: 20px;
-            text-align: center;
         }
         
         /* Floating Ribbon Button */
@@ -317,7 +315,7 @@
             left: 0;
             width: 100%;
             z-index: 999;
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: white;
             padding: 15px;
             text-align: center;
@@ -328,7 +326,7 @@
         }
 
         .floating-ribbon:hover {
-            background: var(--secondary);
+            opacity: 0.9;
         }
 
         /* Footer */
@@ -336,7 +334,6 @@
             background: var(--dark);
             color: white;
             padding: 60px 0 30px;
-            margin-bottom: 50px; /* Ensure space for the floating ribbon */
         }
         
         .footer-content {
@@ -509,7 +506,7 @@
         </div>
     </section>
 
-        <!-- Booking Section -->
+     <!-- Booking Section -->
 
     <section id="booking" class="booking">
 
@@ -573,23 +570,7 @@ var widget = new SimplybookWidget({
 
         </div>
 
-    </section>
-
-                
-
-                <!-- This button is for a direct WhatsApp confirmation -->
-
-                <a href="https://wa.me/27817719639?text=Hi%20Sumeshree%2C%20I%20have%20booked%20an%20appointment%20with%20you%20via%20the%20website%20and%20would%20like%20to%20confirm%20the%20details." class="btn" style="margin-top: 20px;">
-
-                    Confirm Appointment on WhatsApp
-
-                </a>
-
-            </div>
-
-        </div>
-
-    </section>
+    </section>.
     
     <!-- Testimonials Section -->
     <section id="testimonials" class="testimonials">
@@ -810,6 +791,3 @@ var widget = new SimplybookWidget({
     </script>
 </body>
 </html>
-
-
-
