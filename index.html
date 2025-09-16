@@ -7,9 +7,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #ff6b8b;
-            --secondary: #6a60a9;
-            --accent: #ffd166;
+            --primary: #00B5E2; /* Teal/Light Blue from brochure */
+            --secondary: #031E44; /* Dark Blue/Navy from brochure */
+            --accent: #F5C711; /* Gold/Mustard Yellow from brochure */
             --light: #f8f9fa;
             --dark: #212529;
             --success: #06d6a0;
@@ -26,6 +26,7 @@
             background-color: #fff;
             color: var(--dark);
             line-height: 1.6;
+            background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239C92B5' fill-opacity='0.15' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zm1 6v-1L1 6z'/%3E%3C/g%3E%3C/svg%3E");
         }
         
         .container {
@@ -88,7 +89,7 @@
         
         /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(106, 96, 169, 0.8), rgba(255, 107, 139, 0.8)), url('https://images.unsplash.com/photo-1604654894610-df66bc4c55da?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+            background: linear-gradient(rgba(3, 30, 68, 0.8), rgba(0, 181, 226, 0.8)), url('https://images.unsplash.com/photo-1604654894610-df66bc4c55da?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
             color: white;
             text-align: center;
             padding: 100px 20px;
@@ -204,22 +205,39 @@
             margin-bottom: 10px;
         }
         
-        /* Gallery Section */
-        .gallery {
-            background-color: white;
+        /* Gallery Sections */
+        .gallery, .qualifications-section, .actual-work {
+            background: linear-gradient(to bottom, #fff, #f0f8ff); /* Soft gradient background */
         }
         
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        .gallery-wrapper {
+            position: relative;
+            max-width: 100%;
+        }
+
+        .gallery-slider {
+            display: flex;
+            overflow-x: scroll;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
             gap: 15px;
+            padding: 10px 0;
+            /* Hide scrollbar for different browsers */
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+
+        .gallery-slider::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, and Opera */
         }
         
         .gallery-item {
+            flex: 0 0 calc(25% - 15px);
             border-radius: 10px;
             overflow: hidden;
             height: 250px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.5s;
         }
         
         .gallery-item img {
@@ -233,6 +251,35 @@
             transform: scale(1.1);
         }
         
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.8);
+            border: none;
+            padding: 15px 10px;
+            cursor: pointer;
+            z-index: 1;
+            font-size: 24px;
+            color: var(--secondary);
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .nav-btn.left {
+            left: 0;
+        }
+
+        .nav-btn.right {
+            right: 0;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: translateY(-50%) scale(1.1);
+        }
+
         /* Testimonials Section */
         .testimonials {
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
@@ -301,13 +348,13 @@
             margin: 0 auto;
             text-align: center;
         }
-
+        
         #sb_booking {
             width: 100%;
             min-height: 600px;
             margin-top: 20px;
         }
-        
+
         .whatsapp-button {
             margin-top: 20px;
         }
@@ -405,6 +452,12 @@
         }
         
         /* Responsive Design */
+        @media (max-width: 992px) {
+            .gallery-item {
+                flex: 0 0 calc(33.33% - 10px);
+            }
+        }
+
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
@@ -433,19 +486,23 @@
                 flex-direction: column;
             }
             
-            .calendar-grid {
-                grid-template-columns: repeat(7, 1fr);
+            .gallery-item {
+                flex: 0 0 calc(50% - 7.5px);
             }
-            
-            .calendar-cell {
-                height: 30px;
-                font-size: 0.8rem;
+        }
+
+        @media (max-width: 576px) {
+            .gallery-item {
+                flex: 0 0 100%;
+            }
+            .nav-btn {
+                padding: 10px 5px;
+                font-size: 18px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header & Navigation -->
     <header>
         <div class="container header-content">
             <div class="logo">
@@ -455,6 +512,8 @@
             <nav>
                 <ul>
                     <li><a href="#gallery">Our Work</a></li>
+                    <li><a href="#actual-work">Client Work</a></li>
+                    <li><a href="#qualifications">Qualifications</a></li>
                     <li><a href="#booking">Book Now</a></li>
                     <li><a href="#testimonials">Reviews</a></li>
                     <li><a href="#about">About</a></li>
@@ -465,7 +524,6 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="container">
             <h1>We Are Officially Open</h1>
@@ -474,44 +532,84 @@
         </div>
     </section>
 
-    <!-- Gallery Section -->
     <section id="gallery" class="gallery">
         <div class="container">
             <div class="section-title">
                 <h2>Our Work</h2>
-                <p>Browse through our portfolio of nail designs</p>
+                <p>Browse through our portfolio of creative nail designs</p>
             </div>
-            <div class="gallery-grid">
-                <!-- IMPORTANT: Ensure your images are in a folder named 'images' in the same directory as this file -->
-                <div class="gallery-item">
-                    <img src="images/4CE95228-2302-440C-940C-77A00F2CBCAF.JPG" alt="Nail Design 1">
+            <div class="gallery-wrapper">
+                <button class="nav-btn left" onclick="scrollGallery('gallery-slider-1', 'left')"><</button>
+                <div id="gallery-slider-1" class="gallery-slider">
+                    <div class="gallery-item">
+                        <img src="images/4CE95228-2302-440C-940C-77A00F2CBCAF.JPG" alt="Nail Design 1">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/8DA8BC25-0EA5-4518-9466-6905742EE8B2.JPG" alt="Nail Design 2">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/E58829CB-68C5-447C-A502-8324B159B1D0.JPG" alt="Nail Design 3">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/A21B73E5-A68F-47F1-9D3E-F4C9E6671675.JPG" alt="Nail Design 4">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/D3AA44E8-7CD3-4D22-BC2B-4E710FE934A7.JPG" alt="Nail Design 5">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/FCFEE322-BF2B-45C5-958E-FE3CEE0FCDDE.JPG" alt="Nail Design 6">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/E34EED50-8E80-490D-94DE-80C77C38FB26.JPG" alt="Nail Design 7">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/EEE491ED-1BDD-4900-8AD4-0DFB4D573436.JPG" alt="Nail Design 8">
+                    </div>
                 </div>
-                <div class="gallery-item">
-                    <img src="images/8DA8BC25-0EA5-4518-9466-6905742EE8B2.JPG" alt="Nail Design 2">
-                </div>
-                <div class="gallery-item">
-                    <img src="images/E58829CB-68C5-447C-A502-8324B159B1D0.JPG" alt="Nail Design 3">
-                </div>
-                <div class="gallery-item">
-                    <img src="images/A21B73E5-A68F-47F1-9D3E-F4C9E6671675.JPG" alt="Nail Design 4">
-                </div>
-                <div class="gallery-item">
-                    <img src="images/D3AA44E8-7CD3-4D22-BC2B-4E710FE934A7.JPG" alt="Nail Design 5">
-                </div>
-                <div class="gallery-item">
-                    <img src="images/FCFEE322-BF2B-45C5-958E-FE3CEE0FCDDE.JPG" alt="Nail Design 6">
-                </div>
-                <div class="gallery-item">
-                    <img src="images/E34EED50-8E80-490D-94DE-80C77C38FB26.JPG" alt="Nail Design 7">
-                </div>
-                <div class="gallery-item">
-                    <img src="images/EEE491ED-1BDD-4900-8AD4-0DFB4D573436.JPG" alt="Nail Design 8">
-                </div>
+                <button class="nav-btn right" onclick="scrollGallery('gallery-slider-1', 'right')">></button>
             </div>
         </div>
     </section>
 
-    <!-- Booking Section -->
+    <section id="actual-work" class="actual-work">
+        <div class="container">
+            <div class="section-title">
+                <h2>Actual Work on Clients</h2>
+                <p>Browse through photos of our happy clients!</p>
+            </div>
+            <div class="gallery-wrapper">
+                <button class="nav-btn left" onclick="scrollGallery('gallery-slider-2', 'left')"><</button>
+                <div id="gallery-slider-2" class="gallery-slider">
+                    <div class="gallery-item">
+                        <img src="https://via.placeholder.com/300x250/F5C711/031E44?text=Client+Photo+1" alt="Client Photo 1">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://via.placeholder.com/300x250/F5C711/031E44?text=Client+Photo+2" alt="Client Photo 2">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://via.placeholder.com/300x250/F5C711/031E44?text=Client+Photo+3" alt="Client Photo 3">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://via.placeholder.com/300x250/F5C711/031E44?text=Client+Photo+4" alt="Client Photo 4">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://via.placeholder.com/300x250/F5C711/031E44?text=Client+Photo+5" alt="Client Photo 5">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://via.placeholder.com/300x250/F5C711/031E44?text=Client+Photo+6" alt="Client Photo 6">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://via.placeholder.com/300x250/F5C711/031E44?text=Client+Photo+7" alt="Client Photo 7">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://via.placeholder.com/300x250/F5C711/031E44?text=Client+Photo+8" alt="Client Photo 8">
+                    </div>
+                </div>
+                <button class="nav-btn right" onclick="scrollGallery('gallery-slider-2', 'right')">></button>
+            </div>
+        </div>
+    </section>
+
     <section id="booking" class="booking">
         <div class="container">
             <div class="section-title">
@@ -519,19 +617,14 @@
                 <p>Schedule your visit to The Nail Bar</p>
             </div>
             
-            <div class="booking-content">
-                <script src="https://widget.simplybook.me/v2/widget/widget.js"></script>
-                <div id="sb_booking" style="width: 100%; min-height: 600px;"></div>
+            <div id="sb_booking"></div>
                 
-                <!-- This button is for a direct WhatsApp confirmation -->
-                <a href="https://wa.me/27817719639?text=Hi%20Sumeshree%2C%20I%20have%20booked%20an%20appointment%20with%20you%20via%20the%20website%20and%20would%20like%20to%20confirm%20the%20details." class="btn whatsapp-button">
-                    Confirm Appointment on WhatsApp
-                </a>
-            </div>
+            <a href="https://wa.me/27817719639?text=Hi%20Sumeshree%2C%20I%20have%20booked%20an%20appointment%20with%20you%20via%20the%20website%20and%20would%20like%20to%20confirm%20the%20details." class="btn whatsapp-button">
+                <i class="fab fa-whatsapp"></i> Confirm Appointment on WhatsApp
+            </a>
         </div>
     </section>
     
-    <!-- Testimonials Section -->
     <section id="testimonials" class="testimonials">
         <div class="container">
             <div class="section-title">
@@ -600,7 +693,6 @@
         </div>
     </section>
 
-    <!-- About Section -->
     <section id="about" class="about">
         <div class="container">
             <div class="section-title">
@@ -615,13 +707,57 @@
                     <p>With continuous training in the latest techniques and trends, I ensure that every client leaves with nails they love and a smile on their face.</p>
                 </div>
                 <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1590477330006-3c5d61789d32?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Sumesh Moodley - Nail Technician">
+                    <img src="Sumeshprofilepic.png" alt="Sumesh Moodley - Nail Technician">
                 </div>
             </div>
         </div>
     </section>
-    
-    <!-- Specials Section -->
+
+    <section id="qualifications" class="qualifications-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Qualifications</h2>
+                <p>Your nails are in professional hands. View our certifications and awards.</p>
+            </div>
+            <div class="gallery-wrapper">
+                <button class="nav-btn left" onclick="scrollGallery('gallery-slider-3', 'left')"><</button>
+                <div id="gallery-slider-3" class="gallery-slider">
+                    <div class="gallery-item">
+                        <img src="https://via.placeholder.com/300x250/00B5E2/fff?text=Qualification+1" alt="Qualification 1">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://via.placeholder.com/300x250/00B5E2/fff?text=Qualification+2" alt="Qualification 2">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://via.placeholder.com/300x250/00B5E2/fff?text=Qualification+3" alt="Qualification 3">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://via.placeholder.com/300x250/00B5E2/fff?text=Qualification+4" alt="Qualification 4">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://via.placeholder.com/300x250/00B5E2/fff?text=Qualification+5" alt="Qualification 5">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://via.placeholder.com/300x250/00B5E2/fff?text=Qualification+6" alt="Qualification 6">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://via.placeholder.com/300x250/00B5E2/fff?text=Qualification+7" alt="Qualification 7">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://via.placeholder.com/300x250/00B5E2/fff?text=Qualification+8" alt="Qualification 8">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://via.placeholder.com/300x250/00B5E2/fff?text=Qualification+9" alt="Qualification 9">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://via.placeholder.com/300x250/00B5E2/fff?text=Qualification+10" alt="Qualification 10">
+                    </div>
+                </div>
+                <button class="nav-btn right" onclick="scrollGallery('gallery-slider-3', 'right')">></button>
+            </div>
+        </div>
+    </section>
+
     <section id="specials" class="specials">
         <div class="container">
             <div class="section-title">
@@ -629,7 +765,6 @@
                 <p>Take advantage of our special offers and weekday promos!</p>
             </div>
             <div class="specials-grid">
-                <!-- Opening Specials -->
                 <div class="special-card">
                     <h3>Opening Specials</h3>
                     <ul>
@@ -639,7 +774,6 @@
                     </ul>
                 </div>
                 
-                <!-- Weekday Promos -->
                 <div class="special-card">
                     <h3>Weekday Promos</h3>
                     <ul>
@@ -650,7 +784,6 @@
                     </ul>
                 </div>
 
-                <!-- Contract Specials -->
                 <div class="special-card">
                     <h3>Contract Specials</h3>
                     <p>Pay 12 months upfront - Get 10% OFF & no price increases!</p>
@@ -663,12 +796,10 @@
         </div>
     </section>
 
-    <!-- Contact and Connect Section -->
     <section id="contact" class="about">
         <div class="container">
             <div class="section-title">
                 <h2>Contact & Location</h2>
-               
             </div>
             <div class="about-content">
                 <div class="about-text">
@@ -689,10 +820,8 @@
         </div>
     </section>
 
-    <!-- Floating "Book Now" Ribbon -->
     <a href="#booking" class="floating-ribbon">Book an Appointment Now</a>
 
-    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
@@ -721,18 +850,22 @@
                     <h3>Quick Links</h3>
                     <ul>
                         <li><a href="#gallery">Our Work</a></li>
+                        <li><a href="#actual-work">Client Work</a></li>
+                        <li><a href="#qualifications">Qualifications</a></li>
                         <li><a href="#booking">Book Now</a></li>
                         <li><a href="#testimonials">Reviews</a></li>
                         <li><a href="#about">About</a></li>
                         <li><a href="#specials">Specials</a></li>
+                        <li><a href="#contact">Contact</a></li>
                     </ul>
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2024 The Nail Bar. All rights reserved.</p>
+                <p>© 2024 The Nail Bar. All rights reserved.</p>
             </div>
         </div>
     </footer>
+
     <script src="https://widget.simplybook.me/v2/widget/widget.js"></script>
     <script>
         var widget = new SimplybookWidget({
@@ -748,12 +881,19 @@
             "is_rtl": false,
             "app_config": { "allow_switch_to_ada": 0 }
         });
+
+        // Gallery scrolling function
+        function scrollGallery(galleryId, direction) {
+            const gallery = document.getElementById(galleryId);
+            const itemWidth = gallery.querySelector('.gallery-item').clientWidth;
+            const scrollAmount = itemWidth + 15; // 15px is the gap
+            
+            if (direction === 'left') {
+                gallery.scrollLeft -= scrollAmount * 4; // Scroll by 4 items
+            } else {
+                gallery.scrollLeft += scrollAmount * 4; // Scroll by 4 items
+            }
+        }
     </script>
 </body>
 </html>
-
-
-
-
-
-
